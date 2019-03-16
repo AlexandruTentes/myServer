@@ -13,6 +13,12 @@ window.onload = function()
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    socket.emit('latency', Date.now(), function(start_time)
+    {
+        let latency = Date.now() - start_time;
+        console.log(latency);
+    });
+
     //draw current player
     socket.on('draw_this_player', function(data)
     {
@@ -53,6 +59,12 @@ window.onload = function()
                 socket.emit('clear_obj', [object_x, object_y, object_radius]);
                 socket.emit('move_object', e.code);
             }
+
+  	socket.emit('latency', Date.now(), function(start_time)
+	{
+	    let latency = Date.now() - start_time;
+	    console.log(latency);
+	});
     });
 
     document.addEventListener('keyup', function(e)
