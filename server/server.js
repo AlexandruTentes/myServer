@@ -11,7 +11,7 @@ let speed = 1.05;
 
 app.use(express.static('\client'));
 
-let server = app.listen(4000, function()
+let server = app.listen(80, function()
 {
     console.log("Listening to port: " + server.address().port);
 });
@@ -46,6 +46,11 @@ io.on('connect', function(socket)
         object_radius: radius,
         object_socket: socket.id
     }
+
+    socket.on('latency', function(start_time, callback_function)
+    {
+        callback_function(start_time);
+    });
 
     socket.emit('draw_this_player', data[socket.id]);
     socket.emit('draw_other_player', data);
