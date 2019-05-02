@@ -17,7 +17,7 @@ window.onload = function()
     {
         let latency = Date.now() - start_time;
         console.log(latency);
-    });
+    })
 
     //draw current player
     socket.on('draw_this_player', function(data)
